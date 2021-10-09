@@ -4,10 +4,10 @@
 class TrieNode:
     def __init__(self, text=''):
         self.text = text
+        # dict={character of the child: address of the child Trienode}
         self.children = dict()
-        ''' dict={character of the child: address of the child Trienode} '''
+        # A Boolean indicating if the words together in front of the TrieNode is a single word
         self.is_word = False
-        '''Boolean indicating if the words together in front of the TrieNode is a single word'''
 
 
 # Prefix Tree is built with a root node which is a null node when init
@@ -64,8 +64,7 @@ class PrefixTree:
             self.__child_words_for(node.children[letter], words)
 
 
-# Implementation (Example)
-
+# Implementation (Main Function)
 if __name__ == '__main__':
 
     # Build a PrefixTree called trie
