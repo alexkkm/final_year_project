@@ -6,8 +6,6 @@
 # we may need to come back to this list from time to time
 # to re-segment more keys to improve data quality.
 
-# TODO: 個 一 食 點 and more...
-
 丫巴兒
 吖笨
 啊邊個
