@@ -64,9 +64,14 @@ class PrefixTree:
             self.__child_words_for(node.children[letter], words)
 
 
-# Implementation
+# Implementation (Example)
+
 if __name__ == '__main__':
+
+    # Build a PrefixTree called trie
     trie = PrefixTree()
+
+    # Insert the words into the PrefixTree trie
     trie.insert('apple')
     trie.insert('app')
     trie.insert('aposematic')
@@ -76,4 +81,5 @@ if __name__ == '__main__':
     trie.insert('bear')
     trie.insert('bat')
 
-    print(trie.starts_with('a'))
+    # Print out all words start with 'app'
+    print(trie.starts_with('app'))
