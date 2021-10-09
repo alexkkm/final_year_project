@@ -72,14 +72,7 @@ if __name__ == '__main__':
     trie = PrefixTree()
 
     # Insert the words into the PrefixTree trie
-    trie.insert('apple')
-    trie.insert('app')
-    trie.insert('aposematic')
-    trie.insert('appreciate')
-    trie.insert('book')
-    trie.insert('bad')
-    trie.insert('bear')
-    trie.insert('bat')
+    trie.insert('')
 
     # Print out all words start with 'app'
     print(trie.starts_with('app'))
