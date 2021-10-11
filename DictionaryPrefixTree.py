@@ -12,6 +12,7 @@ class TrieNode:
 
 # Prefix Tree is built with a root node which is a null node when init
 class DictionaryPrefixTree:
+
     def __init__(self):
         self.root = TrieNode()
 
@@ -61,8 +62,8 @@ class DictionaryPrefixTree:
         for letter in node.children:
             self.__child_words_for(node.children[letter], words)
 
-    def recursion(self, sentence, words):
-        # print('\nrecursionly working on string:',sentence)
+    # Recursion function for looking for the vocab within the dictionary in the sentence
+    def recursion(self, sentence, dictionary):
         word = ''
         current = self.root
         if len(sentence) > 0:
@@ -75,12 +76,17 @@ class DictionaryPrefixTree:
                     word += letter
                     # print('progress:', word)
                     if current.is_word:
-                        if current.text not in words:
-                            words.append(current.text)
+                        if current.text not in dictionary:
+                            dictionary.append(current.text)
                             # print('found:', current.text)
-                        self.recursion(sentence[idx+1:], words)
+                        self.recursion(sentence[idx+1:], dictionary)
         if len(word) == len(sentence):
-            return words
+            return dictionary
+    # Return a list of vocab which is contains in the given sentence
+
+    def contains(self, sentence):
+        dictionary = list()
+        return self.recursion(sentence, dictionary)
 
     # Main Dishes: Returning the segmented sentence  // Not implement yet
     def segment(self, prefix):
@@ -112,10 +118,9 @@ if __name__ == '__main__':
         # Insert the words into the DictionaryPrefixTree trie
         trie.insert(vocabs)
 
-    # Print out all substring of the sentence which appears in the dictionary
+    # Print out all vocabs of the sentence which appears in the dictionary
     sentence = "中國伊斯蘭教會"
     sentence2 = "大家一齊去食麥當勞"
-    words = list()
-    print(trie.recursion(sentence, words))
-    words = list()
-    print(trie.recursion(sentence2, words))
+    dictionary = list()
+    print(trie.contains(sentence))
+    print(trie.recursion(sentence2, dictionary))
