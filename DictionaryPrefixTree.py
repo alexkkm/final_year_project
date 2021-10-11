@@ -108,7 +108,7 @@ if __name__ == '__main__':
     trie = DictionaryPrefixTree()
 
     # Create a file pointer fd,open th vocab_dictionary with read-only mode
-    with open("vocab_dictionary.txt", 'r', encoding='utf-8') as fd:
+    with open("dictionary/vocab_dictionary.txt", 'r', encoding='utf-8') as fd:
         dictionary_list = fd.readlines()
         # Remove space appears in all lines of dictionary_list
         dictionary_list = [line.rstrip() for line in dictionary_list]
@@ -121,6 +121,10 @@ if __name__ == '__main__':
     # Print out all vocabs of the sentence which appears in the dictionary
     sentence = "中國伊斯蘭教會"
     sentence2 = "大家一齊去食麥當勞"
-    dictionary = list()
+
+    # Print all vocabs contains in sentence
     print(trie.contains(sentence))
+
+    # Old methods to do contains function
+    dictionary = list()
     print(trie.recursion(sentence2, dictionary))
