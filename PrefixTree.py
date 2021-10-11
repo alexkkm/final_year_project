@@ -18,7 +18,6 @@ class PrefixTree:
     # Operations of Prefix Tree
 
     # Inserting a new word to a PrefixTree
-
     def insert(self, word):
         current = self.root
         for i, char in enumerate(word):
@@ -29,7 +28,6 @@ class PrefixTree:
         current.is_word = True
 
     # Returning the TrieNode representing the given word
-
     def find(self, word):
         '''
         Returns the TrieNode representing the given word if it exists
@@ -56,7 +54,8 @@ class PrefixTree:
         self.__child_words_for(current, words)
         return words
 
-    def contain(self, prefix):
+    # Main Dishes: Returning the segmented sentence
+    def segment(self, prefix):
         the_word = ""
         current = self.root
         for char in prefix:
@@ -67,15 +66,15 @@ class PrefixTree:
             the_word = the_word + char
         return the_word
 
-    # Private helper function. Cycles through all children of node recursively, adding them to words if they constitute whole words
+    # Private helper function. Cycles through all children of node recursionly, adding them to words if they constitute whole words
     def __child_words_for(self, node, words):
         if node.is_word:
             words.append(node.text)
         for letter in node.children:
             self.__child_words_for(node.children[letter], words)
 
-    def recoursive(self, sentence, words):
-        # print('\nrecoursively working on string:',sentence)
+    def recursion(self, sentence, words):
+        # print('\nrecursionly working on string:',sentence)
         word = ''
         current = self.root
         if len(sentence) > 0:
@@ -85,40 +84,34 @@ class PrefixTree:
 
                 if letter in current.children:
                     current = current.children[letter]
-                    word+=letter
-                    print('progress:', word)
+                    word += letter
+                    # print('progress:', word)
                     if current.is_word:
                         if current.text not in words:
                             words.append(current.text)
-                            print ('found:', current.text)
-                        self.recoursive(sentence[idx+1:], words)
+                            # print('found:', current.text)
+                        self.recursion(sentence[idx+1:], words)
         if len(word) == len(sentence):
-          return words
+            return words
+
 
 # Implementation (Example)
-
 if __name__ == '__main__':
 
     # Build a PrefixTree called trie
     trie = PrefixTree()
 
     # Insert the words into the PrefixTree trie
-    with open("data\\rime_cantonese\\resegmented.txt", 'r', encoding = 'utf-8') as f:
+    with open("vocab_dictionary.txt", 'r', encoding='utf-8') as f:
         lines = f.readlines()
-        lines = [line.rstrip() for line in lines] #Remove space
+        lines = [line.rstrip() for line in lines]  # Remove space
     for x in lines:
         trie.insert(x)
 
+    # Implementation: Print out all substring of the sentence which appears in the dictionary
     sentence = "中國伊斯蘭教會"
     sentence2 = "大家一起去吃麥當勞"
     words = list()
-    print(trie.recoursive(sentence, words))
+    print(trie.recursion(sentence, words))
     words = list()
-    print(trie.recoursive(sentence2, words))
-
-
-    # Print out all words start with 'app'
-    #print(trie.starts_with('伊斯蘭'))
-    # Check whether the dict contains 'app' and 'book'.
-    #print(trie.contain('伊斯蘭教'))
-    #print(trie.contain('中國伊斯蘭教會'))
+    print(trie.recursion(sentence2, words))
