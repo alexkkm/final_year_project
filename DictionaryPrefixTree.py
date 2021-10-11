@@ -95,7 +95,7 @@ class DictionaryPrefixTree:
         return the_word
 
 
-# Implementation (Example: Print out all substring of the sentence which appears in the dictionary)
+##### Example (Example: Print out all substring of the sentence which appears in the dictionary) #####
 if __name__ == '__main__':
 
     # Build a DictionaryPrefixTree called trie
@@ -112,9 +112,9 @@ if __name__ == '__main__':
         # Insert the words into the DictionaryPrefixTree trie
         trie.insert(vocabs)
 
-    # Implementation: Print out all substring of the sentence which appears in the dictionary
+    # Print out all substring of the sentence which appears in the dictionary
     sentence = "中國伊斯蘭教會"
-    sentence2 = "大家一起去吃麥當勞"
+    sentence2 = "大家一齊去食麥當勞"
     words = list()
     print(trie.recursion(sentence, words))
     words = list()

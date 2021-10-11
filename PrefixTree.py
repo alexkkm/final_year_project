@@ -64,16 +64,16 @@ class SentencePrefixTree:
             self.__child_words_for(node.children[letter], words)
 
 
-# Implementation (Main Function)
+### Example (Simple Example of Prefix Tree)  ###
 if __name__ == '__main__':
 
     # Build a SentencePrefixTree called trie
     trie = SentencePrefixTree()
 
     # Insert the words into the SentencePrefixTree trie
-    trie.insert('apple')
-    trie.insert('app')
-    trie.insert('appciate')
+    trie.insert('我是一個西白利亞人')
+    trie.insert('今天我寒夜裡看雪飄過')
+    trie.insert('世一中場佐真奴')
 
-    # Print out all words start with 'app'
-    print(trie.starts_with('app'))
+    # Print out all sentences start with '我'
+    print(trie.starts_with('我'))
