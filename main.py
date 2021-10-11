@@ -4,7 +4,7 @@ from prefixTree import PrefixTree
 # Convert the multi-lines of strings into list
 def string_to_list(string):
     list_string = list(string.split("\n"))
-    return list_string
+    return list_string   
 
 
 ############## Implementation (Main Function) ####################
