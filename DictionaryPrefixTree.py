@@ -16,8 +16,7 @@ class DictionaryPrefixTree:
     def __init__(self):
         self.root = TrieNode()
 
-    # Operations of Prefix Tree
-
+# Operations of Prefix Tree
     # Inserting a new word to a DictionaryPrefixTree
     def insert(self, word):
         current = self.root
@@ -82,8 +81,8 @@ class DictionaryPrefixTree:
                         self.recursion(sentence[idx+1:], dictionary)
         if len(word) == len(sentence):
             return dictionary
-    # Return a list of vocab which is contains in the given sentence
 
+    # Return a list of vocab which is contains in the given sentence
     def contains(self, sentence):
         dictionary = list()
         return self.recursion(sentence, dictionary)

@@ -12,13 +12,12 @@ class TrieNode:
 
 # Prefix Tree is built with a root node which is a null node when init
 class SentencePrefixTree:
+
     def __init__(self):
         self.root = TrieNode()
 
-    # Operations of Prefix Tree
-
+# Operations of Prefix Tree:
     # Inserting a new word to a SentencePrefixTree
-
     def insert(self, word):
         current = self.root
         for i, char in enumerate(word):
@@ -29,7 +28,6 @@ class SentencePrefixTree:
         current.is_word = True
 
     # Returning the TrieNode representing the given word
-
     def find(self, word):
         '''
         Returns the TrieNode representing the given word if it exists
