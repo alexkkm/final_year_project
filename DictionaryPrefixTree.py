@@ -82,7 +82,7 @@ class DictionaryPrefixTree:
         if len(word) == len(sentence):
             return words
 
-    # Main Dishes: Returning the segmented sentence
+    # Main Dishes: Returning the segmented sentence  // Not implement yet
     def segment(self, prefix):
         the_word = ""
         current = self.root
@@ -95,18 +95,22 @@ class DictionaryPrefixTree:
         return the_word
 
 
-# Implementation (Example)
+# Implementation (Example: Print out all substring of the sentence which appears in the dictionary)
 if __name__ == '__main__':
 
     # Build a DictionaryPrefixTree called trie
     trie = DictionaryPrefixTree()
 
-    # Insert the words into the DictionaryPrefixTree trie
-    with open("vocab_dictionary.txt", 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-        lines = [line.rstrip() for line in lines]  # Remove space
-    for x in lines:
-        trie.insert(x)
+    # Create a file pointer fd,open th vocab_dictionary with read-only mode
+    with open("vocab_dictionary.txt", 'r', encoding='utf-8') as fd:
+        dictionary_list = fd.readlines()
+        # Remove space appears in all lines of dictionary_list
+        dictionary_list = [line.rstrip() for line in dictionary_list]
+
+    # For all vocabs in dictionary_list
+    for vocabs in dictionary_list:
+        # Insert the words into the DictionaryPrefixTree trie
+        trie.insert(vocabs)
 
     # Implementation: Print out all substring of the sentence which appears in the dictionary
     sentence = "中國伊斯蘭教會"
