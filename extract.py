@@ -30,9 +30,19 @@ def remove_symbol(filtered):
     return result
 
 
-# Implementation: Extract the labelled data from FC-001_v2.cha
-if __name__ == '__main__':
-    result_list = read_data("labeled_data/FC-001_v2.cha")
+# Main function: Extract the labelled data from target file
+def extract(filename):
+    # Read the target label dataset file
+    result_list = read_data(filename)
+    # filter out all sentences in target file without '*'
     filter_result = filter_by_keyword(result_list, "*")
-    final = remove_symbol(filter_result)
-    print(final)
+    # Remove all symbol made in labelled dataset
+    final_result = remove_symbol(filter_result)
+    # Return the final result
+    return final_result
+
+
+# # Implementation: Extract the labelled data from FC-001_v2.cha
+if __name__ == '__main__':
+    result = extract("labeled_data/FC-001_v2.cha")
+    print(result)

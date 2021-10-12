@@ -11,13 +11,13 @@ class TrieNode:
 
 
 # Prefix Tree is built with a root node which is a null node when init
-class SentencePrefixTree:
+class PrefixTree:
 
     def __init__(self):
         self.root = TrieNode()
 
 # Operations of Prefix Tree:
-    # Inserting a new word to a SentencePrefixTree
+    # Inserting a new word to a PrefixTree
     def insert(self, word):
         current = self.root
         for i, char in enumerate(word):
@@ -61,14 +61,31 @@ class SentencePrefixTree:
         for letter in node.children:
             self.__child_words_for(node.children[letter], words)
 
+    # Seperate the sentance as a prefix tree structure and return a list.
+    def seperate(self, sentance):
+        sentance_list = list()
+        sentance_len = len(sentance)
+        # We set the maximum number of character in a single word as 5.
+        max_char = 5
+        for i in range(sentance_len - max_char + 1):
+            str1 = sentance[i:max_char+i]
+            for j in range(1, max_char + 1):
+                str2 = str1[0:j]
+                str3 = str1[j:max_char]
+                if str2 != "":
+                    sentance_list.append(str2)
+                if str3 != "":
+                    sentance_list.append(str3)
+        return sentance_list
+
 
 ### Example (Simple Example of Prefix Tree)  ###
 if __name__ == '__main__':
 
-    # Build a SentencePrefixTree called trie
-    trie = SentencePrefixTree()
+    # Build a PrefixTree called trie
+    trie = PrefixTree()
 
-    # Insert the words into the SentencePrefixTree trie
+    # Insert the words into the PrefixTree trie
     trie.insert('我是一個西白利亞人')
     trie.insert('今天我寒夜裡看雪飄過')
     trie.insert('世一中場佐真奴')
