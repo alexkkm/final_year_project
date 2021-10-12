@@ -69,9 +69,11 @@ if __name__ == '__main__':
     trie = SentencePrefixTree()
 
     # Insert the words into the SentencePrefixTree trie
-    trie.insert('我是一個西白利亞人')
+    trie.insert('我是一個西伯利亞人')
     trie.insert('今天我寒夜裡看雪飄過')
     trie.insert('世一中場佐真奴')
+
+
 
     # Print out all sentences start with '我'
     print(trie.starts_with('我'))

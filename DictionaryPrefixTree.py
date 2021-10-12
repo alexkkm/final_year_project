@@ -9,7 +9,6 @@ class TrieNode:
         self.is_word = False
         '''Boolean indicating if the words together in front of the TrieNode is a single word'''
 
-
 # Prefix Tree is built with a root node which is a null node when init
 class DictionaryPrefixTree:
 
