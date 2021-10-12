@@ -1,3 +1,5 @@
+from extract import extract
+from DictionaryPrefixTree import search
 # Structure of Prefix Tree
 
 # TrieNode: null char is added into the text when init, and contains a dict for storing all its children
@@ -61,6 +63,22 @@ class SentencePrefixTree:
         for letter in node.children:
             self.__child_words_for(node.children[letter], words)
 
+    # Seperate the sentance as a prefix tree structure and return a list.
+    def seperate(self, sentance):
+        sentance_list = list()
+        sentance_len = len(sentance)
+
+        for i in range(sentance_len - 5 + 1):
+            str1 = sentance[i:5+i]
+            for j in range(1, 5 + 1):
+                str2 = str1[0:j]
+                str3 = str1[j:5]
+                if str2 != "":
+                    sentance_list.append(str2)
+                if str3 != "":
+                    sentance_list.append(str3)
+        return sentance_list
+
 
 ### Example (Simple Example of Prefix Tree)  ###
 if __name__ == '__main__':
@@ -68,12 +86,29 @@ if __name__ == '__main__':
     # Build a SentencePrefixTree called trie
     trie = SentencePrefixTree()
 
+    sentance = "我係一個西伯利亞人"
+
     # Insert the words into the SentencePrefixTree trie
-    trie.insert('我是一個西伯利亞人')
-    trie.insert('今天我寒夜裡看雪飄過')
-    trie.insert('世一中場佐真奴')
+    trie.insert('我係一個西伯利亞人')
+    #trie.insert('今天我寒夜裡看雪飄過')
+    #trie.insert('世一中場佐真奴')
 
+    # Separate the sentance and search it from the label data
+    print(search(sentance))
+    sentance_list = trie.seperate(sentance)
+    label_data = extract()
+    label_data_len = len(label_data)
+    dict = {}
+    count_char = 0
+    for x in sentance_list:
+        for y in label_data:
+            count_char += y.count(x)
+        dict[x] = count_char
+        count_char = 0
 
+    print(dict)
+        
+    # print(len(label_data))
 
     # Print out all sentences start with '我'
-    print(trie.starts_with('我'))
+    # print(trie.starts_with('我'))

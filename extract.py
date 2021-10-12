@@ -29,10 +29,18 @@ def remove_symbol(filtered):
               for string in filtered]
     return result
 
+# Implementation: Extract the labelled data from FC-001_v2.cha
+def extract():
+    result_list = read_data("labeled_data/FC-001_v2.cha")
+    filter_result = filter_by_keyword(result_list, "*")
+    final = remove_symbol(filter_result)
+    return final
 
+'''
 # Implementation: Extract the labelled data from FC-001_v2.cha
 if __name__ == '__main__':
     result_list = read_data("labeled_data/FC-001_v2.cha")
     filter_result = filter_by_keyword(result_list, "*")
     final = remove_symbol(filter_result)
     print(final)
+'''
