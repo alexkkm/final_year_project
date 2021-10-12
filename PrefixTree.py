@@ -93,13 +93,15 @@ if __name__ == '__main__':
     #trie.insert('今天我寒夜裡看雪飄過')
     #trie.insert('世一中場佐真奴')
 
-    # Separate the sentance and search it from the label data
+    # Search it from the dictionary
     print(search(sentance))
+    # Separate the sentance and search it from the label data
     sentance_list = trie.seperate(sentance)
     label_data = extract()
     label_data_len = len(label_data)
     dict = {}
     count_char = 0
+    # For each substring, count the number of occurrences in label data.
     for x in sentance_list:
         for y in label_data:
             count_char += y.count(x)
@@ -107,7 +109,6 @@ if __name__ == '__main__':
         count_char = 0
 
     print(dict)
-        
     # print(len(label_data))
 
     # Print out all sentences start with '我'
