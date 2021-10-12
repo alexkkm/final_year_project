@@ -1,5 +1,5 @@
 from extract import extract
-from DictionaryPrefixTree import search
+from DictionaryPrefixTree import DictionaryPrefixTree
 # Structure of Prefix Tree
 
 # TrieNode: null char is added into the text when init, and contains a dict for storing all its children
@@ -67,12 +67,13 @@ class SentencePrefixTree:
     def seperate(self, sentance):
         sentance_list = list()
         sentance_len = len(sentance)
-
-        for i in range(sentance_len - 5 + 1):
-            str1 = sentance[i:5+i]
-            for j in range(1, 5 + 1):
+        # We set the maximum number of character in a single word as 5.
+        max_char = 5
+        for i in range(sentance_len - max_char + 1):
+            str1 = sentance[i:max_char+i]
+            for j in range(1, max_char + 1):
                 str2 = str1[0:j]
-                str3 = str1[j:5]
+                str3 = str1[j:max_char]
                 if str2 != "":
                     sentance_list.append(str2)
                 if str3 != "":
@@ -94,7 +95,21 @@ if __name__ == '__main__':
     #trie.insert('世一中場佐真奴')
 
     # Search it from the dictionary
-    print(search(sentance))
+    dict_trie = DictionaryPrefixTree()
+
+    # Create a file pointer fd,open th vocab_dictionary with read-only mode
+    with open("dictionary/vocab_dictionary.txt", 'r', encoding='utf-8') as fd:
+        dictionary_list = fd.readlines()
+        # Remove space appears in all lines of dictionary_list
+        dictionary_list = [line.rstrip() for line in dictionary_list]
+
+    # For all vocabs in dictionary_list
+    for vocabs in dictionary_list:
+        # Insert the words into the DictionaryPrefixTree trie
+        dict_trie.insert(vocabs)
+
+    print(dict_trie.contains(sentance))
+
     # Separate the sentance and search it from the label data
     sentance_list = trie.seperate(sentance)
     label_data = extract()
