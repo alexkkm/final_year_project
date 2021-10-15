@@ -1,10 +1,14 @@
 from extract import extract
 from DictionaryPrefixTree import DictionaryPrefixTree
 from PrefixTree import PrefixTree
+import os
+
+# Label data folder path
+#path = "labeled_data"
+path = os.path.join(os.path.dirname(__file__), "labeled_data")
+
 
 # Seperate the sentance as a prefix tree structure and return a list.
-
-
 def seperate(self, sentance):
     sentance_list = list()
     sentance_len = len(sentance)
@@ -29,7 +33,9 @@ if __name__ == '__main__':
     trie = PrefixTree()
 
     # Sentence would like to analysis
-    sentence = "廣東話容唔容易學"
+    # sentence = "廣東話容唔容易學"
+
+    sentence = "我係一個西伯利亞人"
 
     sentence1 = "世一中場佐真奴"
     sentence2 = "今天我寒夜裡看雪飄過"
@@ -53,18 +59,27 @@ if __name__ == '__main__':
     ####### Output1: Print out all vocab in vocab_dictionary which contains in sentence #######
     print("Vocabs contains:")
     print(dict_trie.contains(sentence))
-    print("\n")
+    print()
     # Separate the sentance and search it from the label data
     sentance_list = trie.seperate(sentence)
-    label_data = extract("labeled_data/FC-001_v2.cha")
-    label_data_len = len(label_data)
     dict = {}
     count_char = 0
+    label_data_len = 0
+    os.chdir(path)
     # For each substring, count the number of occurrences in label data.
     for x in sentance_list:
-        for y in label_data:
-            count_char += y.count(x)
-        dict[x] = count_char
+        for file in os.listdir():
+            if file.endswith(".cha"):
+                file_path = f"{path}/{file}"
+                label_data = extract(file_path)
+                label_data_len += len(label_data)
+                for y in label_data:
+                    count_char += y.count(x)
+                if count_char != 0:
+                    dict[x] = count_char
         count_char = 0
     print("frequency:")
     print(dict)
+    print(label_data_len)
+
+
