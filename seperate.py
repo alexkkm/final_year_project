@@ -1,4 +1,4 @@
-from extract import extract
+from extract import extract_all
 from DictionaryPrefixTree import DictionaryPrefixTree
 from PrefixTree import PrefixTree
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     print("\n")
     # Separate the sentance and search it from the label data
     sentance_list = trie.seperate(sentence)
-    label_data = extract("labeled_data/FC-001_v2.cha")
+    label_data = extract_all()
     label_data_len = len(label_data)
     dict = {}
     count_char = 0
