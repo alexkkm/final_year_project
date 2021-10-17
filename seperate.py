@@ -43,13 +43,16 @@ if __name__ == '__main__':
     # Sentence would like to analysis
     # sentence = "廣東話容唔容易學"
 
-    #sentence = "大家都好中意食麥當勞"
-    sentence = "我老闆想我今晚十點之前做完啲嘢"
+    sentence = "我係大學生幹事會嘅成員"
+    
     sentence1 = "世一中場佐真奴"
     sentence2 = "今天我寒夜裡看雪飄過"
     sentence3 = ""
     sentence4 = "我係一個西伯利亞人"
-    sentence5 = "中國嘅伊斯蘭教會"
+    sentence5 = "大家都好中意食麥當勞"
+    sentence6 = "我老闆想我今晚十點之前做完啲嘢"
+    sentence7 = "中國嘅伊斯蘭教會" # Forward case. It should output "中國/嘅/伊斯蘭/教會" instead of "中國/嘅/伊斯蘭教/會".
+    sentence8 = "我係大學生幹事會嘅成員" # Backward case. It should output "/我/係/大學生/幹事/會/嘅/成員" instead of "/我/係/大學/生/幹事/會/嘅/成員".
 
     # Search it from the dictionary
     dict_trie = DictionaryPrefixTree()
