@@ -5,6 +5,8 @@ import math
 import operator
 
 # Seperate the sentance as a prefix tree structure and return a list.
+
+
 def seperate(max_char, str1):
     sentence_list = list()
     for j in range(1, max_char + 1):
@@ -12,14 +14,15 @@ def seperate(max_char, str1):
         #str3 = str1[j:max_char]
         if str2 != "":
             sentence_list.append(str2)
-        #if str3 != "":
+        # if str3 != "":
         #    sentence_list.append(str3)
     return sentence_list
+
 
 def merge(dictionary, len):
     MI_value = {}
     merged_word = []
-    threshold = 5 # By experiment, set threshold = 5 first.
+    threshold = 5  # By experiment, set threshold = 5 first.
     for key1 in dictionary:
         for key2 in dictionary:
             if key1 + key2 in dictionary:
@@ -34,6 +37,7 @@ def merge(dictionary, len):
                     merged_word.append(merge)
     return merged_word
 
+
 ### Example (print out frequency and vocabs of given sentence)  ###
 if __name__ == '__main__':
 
@@ -44,15 +48,17 @@ if __name__ == '__main__':
     # sentence = "廣東話容唔容易學"
 
     sentence = "我係大學生幹事會嘅成員"
-    
+
     sentence1 = "世一中場佐真奴"
     sentence2 = "今天我寒夜裡看雪飄過"
     sentence3 = ""
     sentence4 = "我係一個西伯利亞人"
     sentence5 = "大家都好中意食麥當勞"
     sentence6 = "我老闆想我今晚十點之前做完啲嘢"
-    sentence7 = "中國嘅伊斯蘭教會" # Forward case. It should output "中國/嘅/伊斯蘭/教會" instead of "中國/嘅/伊斯蘭教/會".
-    sentence8 = "我係大學生幹事會嘅成員" # Backward case. It should output "/我/係/大學生/幹事/會/嘅/成員" instead of "/我/係/大學/生/幹事/會/嘅/成員".
+    # Forward case. It should output "中國/嘅/伊斯蘭/教會" instead of "中國/嘅/伊斯蘭教/會".
+    sentence7 = "中國嘅伊斯蘭教會"
+    # Backward case. It should output "/我/係/大學生/幹事/會/嘅/成員" instead of "/我/係/大學/生/幹事/會/嘅/成員".
+    sentence8 = "我係大學生幹事會嘅成員"
 
     # Search it from the dictionary
     dict_trie = DictionaryPrefixTree()
@@ -106,13 +112,14 @@ if __name__ == '__main__':
         print("frequency:")
 
         # Sort value found from the dictionary in descending order.
-        sorted_dictionary = dict( sorted(dictionary.items(), key=operator.itemgetter(1),reverse=True))
+        sorted_dictionary = dict(
+            sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True))
         print(sorted_dictionary)
         word_list = []
         first_dict_value = list(sorted_dictionary.values())[0]
         if first_dict_value != 0:
             found_label_data = True
-        
+
         for key in sorted_dictionary:
             if key in vocabs:
                 found_vocab = True
@@ -121,11 +128,10 @@ if __name__ == '__main__':
         if found_vocab == True:
             print("Found vocab in dictionary: ")
             print(word_list)
-            #if len(word_list) > 1:
-                # Determine which one is better, i.e. "伊斯蘭", "伊斯蘭教"
-                # See whether the substring of "伊斯蘭教" can connect with "教會", i.e. "教".
+            # if len(word_list) > 1:
+            # Determine which one is better, i.e. "伊斯蘭", "伊斯蘭教"
+            # See whether the substring of "伊斯蘭教" can connect with "教會", i.e. "教".
 
-        
             count = len(word_list[0]) - 1
             if sorted_dictionary[word_list[0]] != 0:
                 found_label_data = True
@@ -133,22 +139,25 @@ if __name__ == '__main__':
                 found_label_data = False
 
         if found_vocab == True and found_label_data == True:
-            the_word = word_list[0] # Should calculate the rating between vocab and label data.
+            # Should calculate the rating between vocab and label data.
+            the_word = word_list[0]
         elif found_vocab == True and found_label_data == False:
-            the_word = word_list[0] # Should calculate the rating between different vocabs, i.e."大學", "大學生".
+            # Should calculate the rating between different vocabs, i.e."大學", "大學生".
+            the_word = word_list[0]
         elif found_vocab == False and found_label_data == True:
-            the_word = list(sorted_dictionary.keys())[0] # For some cases such as "係", "嘅", just split the most frequently label data.
+            # For some cases such as "係", "嘅", just split the most frequently label data.
+            the_word = list(sorted_dictionary.keys())[0]
         else:
-            the_word = list(sorted_dictionary.keys())[0] # Out-of-vocabulary(OOV) cases
-        print("Found vocab: " + str(found_vocab) + " ,number of vocab: " + str(len(word_list)))
+            the_word = list(sorted_dictionary.keys())[
+                0]  # Out-of-vocabulary(OOV) cases
+        print("Found vocab: " + str(found_vocab) +
+              " ,number of vocab: " + str(len(word_list)))
         print("Found label data: " + str(found_label_data))
-        i+=count
-        i+=1
+        i += count
+        i += 1
         new_sentence += "/" + the_word
         print(new_sentence)
 
-    #print("Label Data Length:", label_data_len)
-    #dict2 = {'中': 170, '中國': 20, '斯': 300, '國': 144, '教會': 2, '蘭': 200, '嘅': 1606, '教': 96, '會': 830}
-    #print(merge(dict, label_data_len))
-
-
+    #   print("Label Data Length:", label_data_len)
+    #   dict2 = {'中': 170, '中國': 20, '斯': 300, '國': 144, '教會': 2, '蘭': 200, '嘅': 1606, '教': 96, '會': 830}
+    #   print(merge(dict, label_data_len))
