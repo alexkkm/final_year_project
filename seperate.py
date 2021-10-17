@@ -135,7 +135,7 @@ if __name__ == '__main__':
         if found_vocab == True and found_label_data == True:
             the_word = word_list[0] # Should calculate the rating between vocab and label data.
         elif found_vocab == True and found_label_data == False:
-            the_word = word_list[0] # Should calculate the rating between different vocabs.
+            the_word = word_list[0] # Should calculate the rating between different vocabs, i.e."大學", "大學生".
         elif found_vocab == False and found_label_data == True:
             the_word = list(sorted_dictionary.keys())[0] # For some cases such as "係", "嘅", just split the most frequently label data.
         else:
