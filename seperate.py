@@ -44,14 +44,9 @@ if __name__ == '__main__':
     # Build a PrefixTree called trie
     #trie = PrefixTree()
 
-    # Sentence would like to analysis
-    # sentence = "廣東話容唔容易學"
-
-    sentence = "我係大學生幹事會嘅成員"
-
     sentence1 = "世一中場佐真奴"
     sentence2 = "今天我寒夜裡看雪飄過"
-    sentence3 = ""
+    sentence3 = "有冇諗過冇人想知"
     sentence4 = "我係一個西伯利亞人"
     sentence5 = "大家都好中意食麥當勞"
     sentence6 = "我老闆想我今晚十點之前做完啲嘢"
@@ -59,6 +54,11 @@ if __name__ == '__main__':
     sentence7 = "中國嘅伊斯蘭教會"
     # Backward case. It should output "/我/係/大學生/幹事/會/嘅/成員" instead of "/我/係/大學/生/幹事/會/嘅/成員".
     sentence8 = "我係大學生幹事會嘅成員"
+    sentence9 = "聯合摺埋過檔新亞"
+    sentence10 = "廣東話容唔容易學"
+
+    ### Sentence would like to analysis ###
+    sentence = sentence9
 
     # Search it from the dictionary
     dict_trie = DictionaryPrefixTree()
