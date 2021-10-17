@@ -1,12 +1,8 @@
 from extract import extract_all
 from DictionaryPrefixTree import DictionaryPrefixTree
-from PrefixTree import PrefixTree
-import os
+# from PrefixTree import PrefixTree
 import math
 import operator
-
-# Label data folder path
-path = os.path.join(os.path.dirname(__file__), "labeled_data")
 
 # Seperate the sentance as a prefix tree structure and return a list.
 def seperate(max_char, str1):
@@ -99,24 +95,6 @@ if __name__ == '__main__':
         dictionary = {}
         count_char = 0
 
-        '''
-        os.chdir(path)
-        # For each substring, count the number of occurrences in label data.
-        for x in sentence_list:
-            for file in os.listdir():
-                if file.endswith(".cha"):
-                    file_path = f"{path}/{file}"
-                    label_data = extract(file_path)
-                    label_data_len += len(label_data)
-                    for y in label_data:
-                        count_char += y.count(x)
-                    #if count_char != 0:
-                    dictionary[x] = count_char
-            count_char = 0
-        print("frequency:")
-        #print(dictionary)
-        '''
-
         # For each substring, count the number of occurrences in label data.
         for x in sentence_list:
             for y in label_data:
@@ -153,13 +131,13 @@ if __name__ == '__main__':
                 found_label_data = False
 
         if found_vocab == True and found_label_data == True:
-            the_word = word_list[0] # Should calculate the rating and change it later
+            the_word = word_list[0] # Should calculate the rating between vocab and label data.
         elif found_vocab == True and found_label_data == False:
-            the_word = word_list[0]
+            the_word = word_list[0] # Should calculate the rating between different vocabs.
         elif found_vocab == False and found_label_data == True:
-            the_word = list(sorted_dictionary.keys())[0]
+            the_word = list(sorted_dictionary.keys())[0] # For some cases such as "係", "嘅", just split the most frequently label data.
         else:
-            the_word = list(sorted_dictionary.keys())[0] # Out of bounding case
+            the_word = list(sorted_dictionary.keys())[0] # Out-of-vocabulary(OOV) cases
         print("Found vocab: " + str(found_vocab) + " ,number of vocab: " + str(len(word_list)))
         print("Found label data: " + str(found_label_data))
         i+=count
