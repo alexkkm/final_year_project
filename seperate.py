@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # sentence = "廣東話容唔容易學"
 
     #sentence = "大家都好中意食麥當勞"
-    sentence = "中國嘅伊斯蘭教會"
+    sentence = "我老闆想我今晚十點之前做完啲嘢"
     sentence1 = "世一中場佐真奴"
     sentence2 = "今天我寒夜裡看雪飄過"
     sentence3 = ""
@@ -88,7 +88,6 @@ if __name__ == '__main__':
             str1 = sentence[i:]
             #print("[" + str(i) + ", " + str(sentence_len) + "]")
         count = 0
-        #sentence_list = trie.seperate(maximum_char, str1)
         sentence_list = seperate(maximum_char, str1)
         label_data = extract_all()
         label_data_len = len(label_data)
