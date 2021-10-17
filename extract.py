@@ -42,7 +42,71 @@ def extract(filename):
     return final_result
 
 
-# # Implementation: Extract the labelled data from FC-001_v2.cha
-if __name__ == '__main__':
+# Extract all label dataset from all file in label_data
+def extract_all():
+
     result = extract("labeled_data/FC-001_v2.cha")
+    result = result+extract("labeled_data/FC-005a_v2.cha")
+    result = result+extract("labeled_data/FC-005b_v2.cha")
+    result = result+extract("labeled_data/FC-009b_v.cha")
+    result = result+extract("labeled_data/FC-011_v.cha")
+    result = result+extract("labeled_data/FC-012_v.cha")
+    result = result+extract("labeled_data/FC-013_v.cha")
+    result = result+extract("labeled_data/FC-018_v.cha")
+    result = result+extract("labeled_data/FC-019_v.cha")
+    result = result+extract("labeled_data/FC-020_v.cha")
+    result = result+extract("labeled_data/FC-022a_v.cha")
+    result = result+extract("labeled_data/FC-022b_v.cha")
+    result = result+extract("labeled_data/FC-026_v2.cha")
+    result = result+extract("labeled_data/FC-027_v2.cha")
+    result = result+extract("labeled_data/FC-028_v2.cha")
+    result = result+extract("labeled_data/FC-029_v.cha")
+    result = result+extract("labeled_data/FC-033_v2.cha")
+    result = result+extract("labeled_data/FC-035_v2.cha")
+    result = result+extract("labeled_data/FC-038a_v2.cha")
+    result = result+extract("labeled_data/FC-038b_v2.cha")
+    result = result+extract("labeled_data/FC-042_v.cha")
+    result = result+extract("labeled_data/FC-044_v2.cha")
+    result = result+extract("labeled_data/FC-045_v2.cha")
+    result = result+extract("labeled_data/FC-046_v2.cha")
+    result = result+extract("labeled_data/FC-048_v2.cha")
+    result = result+extract("labeled_data/FC-049_v2.cha")
+    result = result+extract("labeled_data/FC-052_v2.cha")
+    result = result+extract("labeled_data/FC-053_v2.cha")
+    result = result+extract("labeled_data/FC-055_v2.cha")
+    result = result+extract("labeled_data/FC-056_v2.cha")
+    result = result+extract("labeled_data/FC-101_v2.cha")
+    result = result+extract("labeled_data/FC-103_v2.cha")
+    result = result+extract("labeled_data/FC-104_v2.cha")
+    result = result+extract("labeled_data/FC-105_v2.cha")
+    result = result+extract("labeled_data/FC-106a_v2.cha")
+    result = result+extract("labeled_data/FC-106b_v2.cha")
+    result = result+extract("labeled_data/FC-107_v2.cha")
+    result = result+extract("labeled_data/FC-108a_v2.cha")
+    result = result+extract("labeled_data/FC-108c_v2.cha")
+    result = result+extract("labeled_data/FC-108d_v2.cha")
+    result = result+extract("labeled_data/FC-109a_v2.cha")
+    result = result+extract("labeled_data/FC-R002a_v2.cha")
+    result = result+extract("labeled_data/FC-R002b_v2.cha")
+    result = result+extract("labeled_data/FC-R003_v2.cha")
+    result = result+extract("labeled_data/FC-R004_v2.cha")
+    result = result+extract("labeled_data/FC-R005_v2.cha")
+    result = result+extract("labeled_data/FC-R006_v2.cha")
+    result = result+extract("labeled_data/FC-R007_v2.cha")
+    result = result+extract("labeled_data/FC-R009_v.cha")
+    result = result+extract("labeled_data/FC-R010a_v.cha")
+    result = result+extract("labeled_data/FC-R010b_v.cha")
+    result = result+extract("labeled_data/FC-R011_v.cha")
+    result = result+extract("labeled_data/FC-R013a_v.cha")
+    result = result+extract("labeled_data/FC-R013b_v.cha")
+    result = result+extract("labeled_data/FC-R016_v.cha")
+    result = result+extract("labeled_data/FC-R017_v.cha")
+    result = result+extract("labeled_data/FC-R018_v.cha")
+
+    return result
+
+
+#  Implementation: Extract the labelled data from FC-001_v2.cha
+if __name__ == '__main__':
+    result = extract_all()
     print(result)

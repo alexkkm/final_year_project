@@ -1,4 +1,4 @@
-from extract import extract
+from extract import extract_all
 from DictionaryPrefixTree import DictionaryPrefixTree
 from PrefixTree import PrefixTree
 import os
@@ -7,30 +7,13 @@ import operator
 
 # Label data folder path
 path = os.path.join(os.path.dirname(__file__), "labeled_data")
-'''
-# Seperate the sentance as a prefix tree structure and return a list.
-def seperate(self, sentance):
-    sentance_list = list()
-    sentance_len = len(sentance)
-    # We set the maximum number of character in a single word as 5.
-    max_char = 5
-    for i in range(sentance_len - max_char + 1):
-        str1 = sentance[i:max_char+i]
-        for j in range(1, max_char + 1):
-            str2 = str1[0:j]
-            str3 = str1[j:max_char]
-            if str2 != "":
-                sentance_list.append(str2)
-            if str3 != "":
-                sentance_list.append(str3)
-    return sentance_list
-'''
+
 # Seperate the sentance as a prefix tree structure and return a list.
 def seperate(max_char, str1):
     sentence_list = list()
     for j in range(1, max_char + 1):
         str2 = str1[0:j]
-        str3 = str1[j:max_char]
+        #str3 = str1[j:max_char]
         if str2 != "":
             sentence_list.append(str2)
         #if str3 != "":
@@ -111,9 +94,12 @@ if __name__ == '__main__':
         count = 0
         #sentence_list = trie.seperate(maximum_char, str1)
         sentence_list = seperate(maximum_char, str1)
+        label_data = extract_all()
+        label_data_len = len(label_data)
         dictionary = {}
         count_char = 0
-        label_data_len = 0
+
+        '''
         os.chdir(path)
         # For each substring, count the number of occurrences in label data.
         for x in sentence_list:
@@ -129,6 +115,15 @@ if __name__ == '__main__':
             count_char = 0
         print("frequency:")
         #print(dictionary)
+        '''
+
+        # For each substring, count the number of occurrences in label data.
+        for x in sentence_list:
+            for y in label_data:
+                count_char += y.count(x)
+            dictionary[x] = count_char
+            count_char = 0
+        print("frequency:")
 
         # Sort value found from the dictionary in descending order.
         sorted_dictionary = dict( sorted(dictionary.items(), key=operator.itemgetter(1),reverse=True))
@@ -142,14 +137,15 @@ if __name__ == '__main__':
             if key in vocabs:
                 found_vocab = True
                 word_list.append(key)
-        print("Found vocab in dictionary: ")
-        print(word_list)
-        #if len(word_list) > 1:
-            # Determine which one is better, i.e. "伊斯蘭", "伊斯蘭教"
-            # See whether the substring of "伊斯蘭教" can connect with "教會", i.e. "教".
-            
 
         if found_vocab == True:
+            print("Found vocab in dictionary: ")
+            print(word_list)
+            #if len(word_list) > 1:
+                # Determine which one is better, i.e. "伊斯蘭", "伊斯蘭教"
+                # See whether the substring of "伊斯蘭教" can connect with "教會", i.e. "教".
+
+        
             count = len(word_list[0]) - 1
             if sorted_dictionary[word_list[0]] != 0:
                 found_label_data = True
@@ -164,7 +160,8 @@ if __name__ == '__main__':
             the_word = list(sorted_dictionary.keys())[0]
         else:
             the_word = list(sorted_dictionary.keys())[0] # Out of bounding case
-        print("Found vocab: " + str(found_vocab) + " ,Found label data: " + str(found_label_data))
+        print("Found vocab: " + str(found_vocab) + " ,number of vocab: " + str(len(word_list)))
+        print("Found label data: " + str(found_label_data))
         i+=count
         i+=1
         new_sentence += "/" + the_word
