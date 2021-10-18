@@ -2,7 +2,7 @@ from DictionaryPrefixTree import DictionaryPrefixTree
 from extract import extract_all
 
 
-if __name__ == '__main__':
+def calculating_frequency():
     with open("dictionary/vocab_dictionary.txt", 'r', encoding='utf-8') as fd:
         dictionary_list = fd.readlines()
     # Remove space appears in all lines of dictionary_list
@@ -13,7 +13,7 @@ if __name__ == '__main__':
     label_data = extract_all()
     dictionary = {}
 
-    counter = 0
+    progress = 0
 
     # For each substring, count the number of occurrences in label data.
     for vocab in dictionary_dict:
@@ -21,10 +21,15 @@ if __name__ == '__main__':
             count_char = 0
             count_char += y.count(vocab)
         dictionary[vocab] = count_char
-        counter += 1
-        print("counter:")
-        print(counter)
+        progress += 1
+        print("Progress:")
+        print(progress)
 
+    # Write the result into new file
     with open("vocab_frequency_in_label_data.txt", "w+", encoding='utf-8') as fp:
         fp.write("freqency:\n")
         fp.write(str(dictionary))
+
+
+if __name__ == '__main__':
+    print("end")
