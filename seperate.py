@@ -1,12 +1,10 @@
 from extract import extract_all
 from DictionaryPrefixTree import DictionaryPrefixTree
-# from PrefixTree import PrefixTree
 import math
 import operator
 
+
 # Seperate the sentance as a prefix tree structure and return a list.
-
-
 def seperate(max_char, str1):
     sentence_list = list()
     for j in range(1, max_char + 1):
@@ -19,6 +17,7 @@ def seperate(max_char, str1):
     return sentence_list
 
 
+# Merge 2 segments accroding to threshold value measure
 def merge(dictionary, len):
     MI_value = {}
     merged_word = []
@@ -56,9 +55,10 @@ if __name__ == '__main__':
     sentence8 = "我係大學生幹事會嘅成員"
     sentence9 = "聯合摺埋過檔新亞"
     sentence10 = "廣東話容唔容易學"
+    sentence11 = "大學生活多姿多彩"
 
     ### Sentence would like to analysis ###
-    sentence = sentence9
+    sentence = sentence11
 
     # Search it from the dictionary
     dict_trie = DictionaryPrefixTree()
