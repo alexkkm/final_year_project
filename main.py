@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     sentence1 = "世一中場佐真奴"
     sentence2 = "大學生活多姿多彩"
-    sentence3 = "你嗰陣時有冇諗過冇人想知"
+    sentence3 = "你嗰陣時有冇諗過冇人想知" # Now is "嗰陣/時", we should change to "嗰陣時" by considering label data
     sentence4 = "廣東話容唔容易學"
     sentence5 = "大家都好中意食麥當勞"
     sentence6 = "我老闆想我今晚十點之前做完啲嘢"
