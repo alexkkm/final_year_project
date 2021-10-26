@@ -15,7 +15,7 @@ if __name__ == '__main__':
     sentence5 = "大家都好中意食麥當勞"
     sentence6 = "我老闆想我今晚十點之前做完啲嘢"
     # Forward case. It should output "中國/嘅/伊斯蘭/教會" instead of "中國/嘅/伊斯蘭教/會".
-    sentence7 = "中國嘅伊斯蘭教會"
+    sentence7 = "中國伊斯蘭教嘅伊斯蘭教會"
     # Backward case. It should output "/我/係/大學生/幹事/會/嘅/成員" instead of "/我/係/大學/生/幹事/會/嘅/成員".
     sentence8 = "我係大學生幹事會嘅成員"
     sentence9 = "聯合摺埋過檔新亞"
@@ -31,6 +31,9 @@ if __name__ == '__main__':
     #sentence_list.append(sentence4)
     #sentence_list.append(sentence5)
     #sentence_list.append(sentence6)
+    sentence_list.append(sentence7)
+    sentence_list.append(sentence8)
+
 
     segmentation_result = segment(sentence_list)
 
@@ -49,7 +52,10 @@ if __name__ == '__main__':
         '我/老闆/想/我/今晚/十點/之前/做完/啲/嘢']
     '''
 
-    correct_sentence_list = ['你/嗰陣時/有冇/諗過/冇人/想/知']
+    correct_sentence_list = [
+        '你/嗰陣時/有冇/諗過/冇人/想/知', 
+        '中國/伊斯蘭教/嘅/伊斯蘭/教會',
+        '我/係/大學生/幹事會/嘅/成員']
 
     # Calculate Precision
     f_score(segmentation_result, correct_sentence_list)

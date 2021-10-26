@@ -40,8 +40,21 @@ def merge(dictionary, len):
 '''
 
 def merge(word1, count_word1, word2, count_word2, label_data, len):
+    '''
+    Determine which one is better, i.e. "嗰陣", "嗰陣時"
+    Number of "嗰陣" in label data: 197
+    Number of "時" in label data: 614
+    Number of "嗰陣時" in label data: 186
+    Number of vacab = M (constant value)
+    Threshold = μ (constant value, estimated through experiments)
+    MI("嗰陣", "時") = log(2, (186 * M) / (197 * 614))
+    if MI("嗰陣", "時") >= threshold:
+        return Ture -> "嗰陣時"
+    else:
+        return False -> "嗰陣/時"
+    '''
     MI_value = 0
-    merged_word = ""
+    merged_word = False
     # TODO: By experiment, set threshold = 5 first.
     threshold = 5
     word3 = word2.replace(word1, "")
@@ -51,12 +64,12 @@ def merge(word1, count_word1, word2, count_word2, label_data, len):
     print(word1 + ": " + str(count_word1))
     print(word2 + ": " + str(count_word2))
     print(word3 + ": " + str(count_word3))
-    total = (count_word2 * len) / (count_word1 * count_word3)
-    MI_value = math.log(total, 2)
-    print(MI_value)
+    if count_word1 != 0 and count_word3 != 0:
+        total = (count_word2 * len) / (count_word1 * count_word3)
+        MI_value = math.log(total, 2)
+        print("MI Value:", MI_value)
     if MI_value >= threshold:
         merged_word = True
-        #print(merged_word)
     return merged_word
 
 # Segment all sentence in the given sentence list,and return a list of segmented sentence
@@ -133,8 +146,7 @@ def segment(sentence_list):
             if found_vocab == True:
                 print("Found vocab in dictionary: ")
                 print(word_list)
-                # Determine which one is better, i.e. "伊斯蘭", "伊斯蘭教"
-                # See whether the substring of "伊斯蘭教" can connect with "教會", i.e. "教".
+
                 if len(word_list) > 1:
                     if len(word_list) == 2:
                         merge_word = merge(word_list[0], sorted_dictionary[word_list[0]], word_list[1], sorted_dictionary[word_list[1]], label_data, dictionary_list_len)
