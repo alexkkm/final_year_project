@@ -55,8 +55,8 @@ def merge(word1, count_word1, word2, count_word2, label_data, len):
     '''
     MI_value = 0
     merged_word = False
-    # TODO: By experiment, set threshold = 5 first.
-    threshold = 5
+    # TODO: By experiment, set threshold = 6 first.
+    threshold = 6
     word3 = word2.replace(word1, "")
     count_word3 = 0
     for x in label_data:
