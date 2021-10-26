@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     sentence1 = "世一中場佐真奴"
     sentence2 = "大學生活多姿多彩"
-    sentence3 = "有冇諗過冇人想知"
+    sentence3 = "你嗰陣時有冇諗過冇人想知"
     sentence4 = "廣東話容唔容易學"
     sentence5 = "大家都好中意食麥當勞"
     sentence6 = "我老闆想我今晚十點之前做完啲嘢"
@@ -25,12 +25,12 @@ if __name__ == '__main__':
     ### Sentence would like to analysis ###
     sentence = sentence11
     sentence_list = []
-    sentence_list.append(sentence1)
-    sentence_list.append(sentence2)
+    #sentence_list.append(sentence1)
+    #sentence_list.append(sentence2)
     sentence_list.append(sentence3)
-    sentence_list.append(sentence4)
-    sentence_list.append(sentence5)
-    sentence_list.append(sentence6)
+    #sentence_list.append(sentence4)
+    #sentence_list.append(sentence5)
+    #sentence_list.append(sentence6)
 
     segmentation_result = segment(sentence_list)
 
@@ -39,13 +39,17 @@ if __name__ == '__main__':
     print("segmentation_result_list: "+str(segmentation_result))
     print("\n")
 
+    '''
     correct_sentence_list = [
         '世一/中場/佐真奴',
         '大學/生活/多姿多彩',
-        '有冇/諗過/冇人/想/知',
+        '你/嗰陣時/有冇/諗過/冇人/想/知',
         '廣東話/容/唔/容易/學',
         '大家/都/好/中意/食/麥當勞',
         '我/老闆/想/我/今晚/十點/之前/做完/啲/嘢']
+    '''
+
+    correct_sentence_list = ['你/嗰陣時/有冇/諗過/冇人/想/知']
 
     # Calculate Precision
     f_score(segmentation_result, correct_sentence_list)
