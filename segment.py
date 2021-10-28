@@ -98,7 +98,7 @@ def segment(sentence_list):
 
         # Build a LabelDataPrefixTree called trie
         label_data_trie = LabelDataPrefixTree()
-
+        count_label_data = 0
         label_data = extract_all()
         for label_data_list in label_data:
             label_data_split = label_data_list.split()
@@ -106,7 +106,8 @@ def segment(sentence_list):
             for vocabs2 in label_data_split:
                 # Insert the words into the LabelDataPrefixTree trie
                 label_data_trie.insert(vocabs2)
-
+                count_label_data += 1
+        print("count_label_data:", count_label_data)
         ####### Output2: Print out all segmentd sentance in label data by prefix trie #######
         sentence_len = len(sentence)
         new_segment = ""
@@ -125,7 +126,7 @@ def segment(sentence_list):
                 #print("[" + str(i) + ", " + str(sentence_len) + "]")
             count = 0
             sentence_list = sentence_to_prefix_tree_list(maximum_char, str1)
-            dictionary_list_len = len(dictionary_list)
+            #dictionary_list_len = len(dictionary_list)
             dictionary = {}
 
             for x in sentence_list:
@@ -153,7 +154,7 @@ def segment(sentence_list):
 
                 if len(word_list) > 1:
                     if len(word_list) == 2:
-                        merge_word = merge(word_list[0], sorted_dictionary[word_list[0]], word_list[1], sorted_dictionary[word_list[1]], label_data, dictionary_list_len)
+                        merge_word = merge(word_list[0], sorted_dictionary[word_list[0]], word_list[1], sorted_dictionary[word_list[1]], label_data, count_label_data)
                         print(str(merge_word))
                         if merge_word == True:
                             index = 1
