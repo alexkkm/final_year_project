@@ -27,12 +27,12 @@ if __name__ == '__main__':
     sentence_list = []
     #sentence_list.append(sentence1)
     #sentence_list.append(sentence2)
-    sentence_list.append(sentence3)
+    #sentence_list.append(sentence3)
     #sentence_list.append(sentence4)
     #sentence_list.append(sentence5)
     #sentence_list.append(sentence6)
     sentence_list.append(sentence7)
-    sentence_list.append(sentence8)
+    #sentence_list.append(sentence8)
 
 
     segmentation_result = segment(sentence_list)

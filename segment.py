@@ -1,5 +1,6 @@
 from extract import extract_all
 from DictionaryPrefixTree import DictionaryPrefixTree
+from LabelDataPrefixTree import LabelDataPrefixTree
 import math
 import operator
 
@@ -95,6 +96,17 @@ def segment(sentence_list):
         vocabs = dict_trie.contains(sentence)
         print(vocabs)
 
+        # Build a LabelDataPrefixTree called trie
+        label_data_trie = LabelDataPrefixTree()
+
+        label_data = extract_all()
+        for label_data_list in label_data:
+            label_data_split = label_data_list.split()
+            # For all vocabs in label_data_list
+            for vocabs2 in label_data_split:
+                # Insert the words into the LabelDataPrefixTree trie
+                label_data_trie.insert(vocabs2)
+
         ####### Output2: Print out all segmentd sentance in label data by prefix trie #######
         sentence_len = len(sentence)
         new_segment = ""
@@ -113,18 +125,11 @@ def segment(sentence_list):
                 #print("[" + str(i) + ", " + str(sentence_len) + "]")
             count = 0
             sentence_list = sentence_to_prefix_tree_list(maximum_char, str1)
-            label_data = extract_all()
             dictionary_list_len = len(dictionary_list)
-            #print("dictionary_list_len:", dictionary_list_len)
             dictionary = {}
-            count_char = 0
 
-            # For each substring, count the number of occurrences in label data.
             for x in sentence_list:
-                for y in label_data:
-                    count_char += y.count(x)
-                dictionary[x] = count_char
-                count_char = 0
+                dictionary[x] = label_data_trie.count_dict(x)
             print("frequency:")
 
             # Sort value found from the dictionary in descending order.
@@ -137,7 +142,6 @@ def segment(sentence_list):
             first_dict_value = list(sorted_dictionary.values())[0]
             if first_dict_value != 0:
                 found_label_data = True
-
             for key in sorted_dictionary:
                 if key in vocabs:
                     found_vocab = True
