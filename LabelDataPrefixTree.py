@@ -36,7 +36,7 @@ class LabelDataPrefixTree:
             current = current.children[char]
         current.is_word = True
 
-    def count_dict(self, word):
+    def get_frequency(self, word):
         count = 0
         if word in self.dictionary:
             count = self.dictionary[word]
@@ -137,12 +137,12 @@ if __name__ == '__main__':
     sentence3 = "嗰陣時去"
     # Print all vocabs contains in sentence
     print(trie.contains(sentence))
-    print(trie.count_dict("嗰陣"))
-    print(trie.count_dict("時"))
-    print(trie.count_dict("嗰陣時"))
-    print(trie.count_dict("大學生"))
-    print(trie.count_dict("大學"))
-    print(trie.count_dict("生"))
+    print(trie.get_frequency("嗰陣"))
+    print(trie.get_frequency("時"))
+    print(trie.get_frequency("嗰陣時"))
+    print(trie.get_frequency("大學生"))
+    print(trie.get_frequency("大學"))
+    print(trie.get_frequency("生"))
     # Old methods to do contains function
     #dictionary = list()
     #print(trie.recursion(sentence2, dictionary))
