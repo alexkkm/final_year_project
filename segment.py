@@ -20,7 +20,7 @@ def merge(word1, count_word1, word2, count_word2, label_data, len):
     Number of "嗰陣" in label data: 197
     Number of "時" in label data: 614
     Number of "嗰陣時" in label data: 186
-    Number of vacab = M (constant value)
+    Number of vocab = M (constant value)
     Threshold = μ (constant value, estimated through experiments)
     MI("嗰陣", "時") = log(2, (186 * M) / (197 * 614))
     if MI("嗰陣", "時") >= threshold:

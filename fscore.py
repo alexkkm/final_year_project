@@ -41,7 +41,7 @@ def f_score(segmentation_result, correct_sentence_list):
             if sentence1[x] == "/" and sentence2[x] == "/":
                 count_TP += 1  # TP
             if sentence1[x] != "/" and sentence2[x] == "/":
-                count_FN += 1  # TP
+                count_FN += 1  # FN
         precision += count_TP / (count_TP + count_FP)
         recall += count_TP / (count_TP + count_FN)
         print("segmentation result: "+str(sentence1))
