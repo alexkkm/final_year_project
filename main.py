@@ -6,7 +6,7 @@ from segment import segment
 # (Now unable the merging measure)
 
 if __name__ == '__main__':
-
+    '''
     sentence1 = "世一中場佐真奴"
     sentence2 = "大學生活多姿多彩"
     sentence3 = "你嗰陣時有冇諗過放棄" # Now is "嗰陣/時", we should change to "嗰陣時" by considering label data
@@ -20,7 +20,8 @@ if __name__ == '__main__':
     sentence9 = "聯合摺埋過檔新亞"
     sentence10 = "我係一個西伯利亞人"
     sentence11 = "大學生活多姿多彩"
-
+    '''
+    
     ### Sentence would like to analysis ###
     sentence_list = []
     sentence_list2 = []
