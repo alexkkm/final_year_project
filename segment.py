@@ -36,13 +36,13 @@ def merge(word1, count_word1, word2, count_word2, label_data, len):
     count_word3 = 0
     for x in label_data:
         count_word3 += x.count(word3)
-    print(word1 + ": " + str(count_word1))
-    print(word2 + ": " + str(count_word2))
-    print(word3 + ": " + str(count_word3))
-    if count_word1 != 0 and count_word3 != 0:
+    #print(word1 + ": " + str(count_word1))
+    #print(word2 + ": " + str(count_word2))
+    #print(word3 + ": " + str(count_word3))
+    if count_word1 != 0 and count_word2 != 0 and count_word3 != 0:
         total = (count_word2 * len) / (count_word1 * count_word3)
         MI_value = math.log(total, 2)
-        print("MI Value:", MI_value)
+        #print("MI Value:", MI_value)
     if MI_value >= threshold:
         merged_word = True
     return merged_word
@@ -50,7 +50,9 @@ def merge(word1, count_word1, word2, count_word2, label_data, len):
 # Segment all sentence in the given sentence list,and return a list of segmented sentence
 def segment(sentence_list):
     segmentation_result = []
+    my_count = 0
     for sentence in sentence_list:
+        print(my_count + ": " + sentence)
         # Dictionary-based Part
         # Build a Vocab Dictionary Prefix Tree
         dict_trie = DictionaryPrefixTree()
@@ -67,9 +69,9 @@ def segment(sentence_list):
             dict_trie.insert(vocabs)
 
         ####### Output1: Print out all vocab in vocab_dictionary which contains in sentence #######
-        print("Vocabs contains:")
+        #print("Vocabs contains:")
         vocabs = dict_trie.contains(sentence)
-        print(vocabs)
+        #print(vocabs)
 
         # Build a Label Data Prefix Tree
         label_data_trie = LabelDataPrefixTree()
@@ -85,7 +87,7 @@ def segment(sentence_list):
                 label_data_trie.insert(vocabs2)
                 # Calculate the number of characters in label data for calculate the MI value -> M
                 count_label_data += 1
-        print("count_label_data:", count_label_data)
+        #print("count_label_data:", count_label_data)
 
         sentence_len = len(sentence)
         new_segment = ""
@@ -109,12 +111,12 @@ def segment(sentence_list):
             # Get the frequency of each splitted sentence, if no just return 0
             for x in sentence_list:
                 dictionary[x] = label_data_trie.get_frequency(x)
-            print("frequency:")
+            #print("frequency:")
 
             # Sort value found from the dictionary in descending order.
             sorted_dictionary = dict(
                 sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True))
-            print(sorted_dictionary)
+            #print(sorted_dictionary)
 
             word_list = []
             index = 0
@@ -126,19 +128,20 @@ def segment(sentence_list):
             # If the key in the sorted dictionary can be found in the 
             # vocab dictionary, return true
             for key in sorted_dictionary:
-                if key in vocabs:
-                    found_vocab = True
-                    word_list.append(key)
+                if vocabs is not None:
+                    if key in vocabs:
+                        found_vocab = True
+                        word_list.append(key)
 
             if found_vocab == True:
-                print("Found vocab in dictionary: ")
-                print(word_list)
+                #print("Found vocab in dictionary: ")
+                #print(word_list)
 
                 # If there are more than one vocab in the dictionary, use MI to measure which one is better
                 if len(word_list) > 1:
                     if len(word_list) >= 2:
                         merge_word = merge(word_list[0], sorted_dictionary[word_list[0]], word_list[1], sorted_dictionary[word_list[1]], label_data, count_label_data)
-                        print("Merge word:", str(merge_word))
+                        #print("Merge word:", str(merge_word))
                         if merge_word == True:
                             index = 1
                 
@@ -157,17 +160,17 @@ def segment(sentence_list):
                 the_word = list(sorted_dictionary.keys())[0]
             else:
                 the_word = list(sorted_dictionary.keys())[0]  # Out-of-vocabulary(OOV) cases
-            print("Found vocab: " + str(found_vocab) +
-                  " ,number of vocab: " + str(len(word_list)))
-            print("Found label data: " + str(found_label_data))
+            #print("Found vocab: " + str(found_vocab) +
+            #      " ,number of vocab: " + str(len(word_list)))
+            #print("Found label data: " + str(found_label_data))
             i += count
             i += 1
             if i < sentence_len:
                 new_segment += the_word + "/"
             else:
                 new_segment += the_word
-            print(new_segment)
+            #print(new_segment)
             if i >= sentence_len:
                 segmentation_result.append(new_segment)
-            print("\n")
+            #print("\n")
     return segmentation_result

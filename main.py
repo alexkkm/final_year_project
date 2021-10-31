@@ -35,20 +35,29 @@ if __name__ == '__main__':
     ### Sentence would like to analysis ###
     sentence_list = []
     sentence_list2 = []
-    with open("testing_data/testing_data.txt", 'r', encoding='utf-8') as fd:
+
+    with open("testing_data/testing_data_real.txt", 'r', encoding='utf-8') as fd:
         sentence_list = fd.readlines()
     for i in range(len(sentence_list)):
         tmp = sentence_list[i].replace("\n", "")
+        tmp = tmp.replace(" ", "")
         sentence_list2.append(tmp)
 
     segmentation_result = segment(sentence_list2)
+    #segmentation_result = sentence_list2
 
     # Print the segmentation result
-    print("segmentation_result_list: "+str(segmentation_result))
-
+    #print("segmentation_result_list: "+str(segmentation_result))
+    '''
+    fp = open("testing_data/output_data.txt", "w+", encoding='utf-8')
+    for x in segmentation_result:
+        the_str = x + "\n"
+        #print(the_str)
+        fp.write(the_str)
+    '''
     correct_sentence_list = []
     correct_sentence_list2 = []
-    with open("testing_data/correct_data.txt", 'r', encoding='utf-8') as fd:
+    with open("testing_data/correct_data_real.txt", 'r', encoding='utf-8') as fd:
         correct_sentence_list = fd.readlines()
     for j in range(len(correct_sentence_list)):
         tmp = correct_sentence_list[j].replace("\n", "")
