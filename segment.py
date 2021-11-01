@@ -6,7 +6,6 @@ import operator
 
 # Seperate the sentence as a prefix tree structure and return a list.
 
-
 def sentence_to_prefix_tree_list(max_char, str1):
     sentence_list = list()
     for j in range(1, max_char + 1):
@@ -18,7 +17,7 @@ def sentence_to_prefix_tree_list(max_char, str1):
 # Merge 2 small segments into a bigger segment accroding to threshold value measure
 
 
-def merge(word1, count_word1, word2, count_word2, label_data, len):
+def merge(word1, count_word1, word2, count_word2, label_data, len, vocab_list):
     '''
     Determine which one is better, i.e. "嗰陣", "嗰陣時"
     Number of "嗰陣" in label data: 197
@@ -40,15 +39,28 @@ def merge(word1, count_word1, word2, count_word2, label_data, len):
     count_word3 = 0
     for x in label_data:
         count_word3 += x.count(word3)
-    print(word1 + ": " + str(count_word1))
-    print(word2 + ": " + str(count_word2))
-    print(word3 + ": " + str(count_word3))
+    word4 = ""
+    count_word4 = 0
+    for y in vocab_list:
+        if word3 in y:
+            if y != word1 and y != word2:
+                word4 = y
+    if word4 != "":
+        for x in label_data:
+            count_word4 += x.count(word4)
+    #print(word1 + ": " + str(count_word1))
+    #print(word2 + ": " + str(count_word2))
+    #print(word3 + ": " + str(count_word3))
+    #print(word4 + ": " + str(count_word4))
+
     if count_word1 != 0 and count_word2 != 0 and count_word3 != 0:
         total = (count_word2 * len) / (count_word1 * count_word3)
         MI_value = math.log(total, 2)
-        print("MI Value:", MI_value)
+        #print("MI Value:", MI_value)
     if MI_value >= threshold:
         merged_word = True
+    if word4 != "" and count_word1 != 0:
+        merged_word = False
     return merged_word
 
 # Segment all sentence in the given sentence list,and return a list of segmented sentence
@@ -124,12 +136,12 @@ def segment(sentence_list):
             # Get the frequency of each splitted sentence, if no just return 0
             for x in sentence_list:
                 dictionary[x] = label_data_trie.get_frequency(x)
-            print("frequency:")
+            #print("frequency:")
 
             # Sort value found from the dictionary in descending order.
             sorted_dictionary = dict(
                 sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True))
-            print(sorted_dictionary)
+            #print(sorted_dictionary)
 
             word_list = []
             index = 0
@@ -147,14 +159,14 @@ def segment(sentence_list):
                         word_list.append(key)
 
             if found_vocab == True:
-                print("Found vocab in dictionary: ")
-                print(word_list)
+                #print("Found vocab in dictionary: ")
+                #print(word_list)
 
                 # If there are more than one vocab in the dictionary, use MI to measure which one is better
                 if len(word_list) > 1:
                     if len(word_list) >= 2:
                         merge_word = merge(word_list[0], sorted_dictionary[word_list[0]], word_list[1],
-                                           sorted_dictionary[word_list[1]], label_data, count_label_data)
+                                           sorted_dictionary[word_list[1]], label_data, count_label_data, vocabs)
                         #print("Merge word:", str(merge_word))
                         if merge_word == True:
                             index = 1
@@ -175,17 +187,17 @@ def segment(sentence_list):
             else:
                 the_word = list(sorted_dictionary.keys())[
                     0]  # Out-of-vocabulary(OOV) cases
-            print("Found vocab: " + str(found_vocab) +
-                  " ,number of vocab: " + str(len(word_list)))
-            print("Found label data: " + str(found_label_data))
+            #print("Found vocab: " + str(found_vocab) +
+            #      " ,number of vocab: " + str(len(word_list)))
+            #print("Found label data: " + str(found_label_data))
             i += count
             i += 1
             if i < sentence_len:
                 new_segment += the_word + "/"
             else:
                 new_segment += the_word
-            print(new_segment)
+            #print(new_segment)
             if i >= sentence_len:
                 segmentation_result.append(new_segment)
-            print("\n")
+            #print("\n")
     return segmentation_result
