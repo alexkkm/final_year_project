@@ -5,6 +5,8 @@ import math
 import operator
 
 # Seperate the sentence as a prefix tree structure and return a list.
+
+
 def sentence_to_prefix_tree_list(max_char, str1):
     sentence_list = list()
     for j in range(1, max_char + 1):
@@ -14,6 +16,8 @@ def sentence_to_prefix_tree_list(max_char, str1):
     return sentence_list
 
 # Merge 2 small segments into a bigger segment accroding to threshold value measure
+
+
 def merge(word1, count_word1, word2, count_word2, label_data, len):
     '''
     Determine which one is better, i.e. "嗰陣", "嗰陣時"
@@ -36,18 +40,20 @@ def merge(word1, count_word1, word2, count_word2, label_data, len):
     count_word3 = 0
     for x in label_data:
         count_word3 += x.count(word3)
-    #print(word1 + ": " + str(count_word1))
-    #print(word2 + ": " + str(count_word2))
-    #print(word3 + ": " + str(count_word3))
+    print(word1 + ": " + str(count_word1))
+    print(word2 + ": " + str(count_word2))
+    print(word3 + ": " + str(count_word3))
     if count_word1 != 0 and count_word2 != 0 and count_word3 != 0:
         total = (count_word2 * len) / (count_word1 * count_word3)
         MI_value = math.log(total, 2)
-        #print("MI Value:", MI_value)
+        print("MI Value:", MI_value)
     if MI_value >= threshold:
         merged_word = True
     return merged_word
 
 # Segment all sentence in the given sentence list,and return a list of segmented sentence
+
+
 def segment(sentence_list):
     segmentation_result = []
     my_count = 1
@@ -76,7 +82,7 @@ def segment(sentence_list):
         for ch in [' ', '.', '。', '?', '？', ',', '，', '<', '《', '>', '》', '、', '\\', '/', '\'', '“', '"', '”', '：', ':', '；', ';', '{', '}', '[', ']', '(', ')', '!', '！', '@', '#', '$', '%', '^', '&', '*', '_', '-', '+', '=', '|']:
             if ch in tmp_sentence:
                 tmp_sentence = tmp_sentence.replace(ch, "")
-        #print(tmp_sentence)
+        # print(tmp_sentence)
         vocabs = dict_trie.contains(tmp_sentence)
         print(vocabs)
 
@@ -128,11 +134,11 @@ def segment(sentence_list):
             word_list = []
             index = 0
             first_dict_value = list(sorted_dictionary.values())[0]
-            # If the first value of the sorted dictionary is not zero, 
+            # If the first value of the sorted dictionary is not zero,
             # it means we can at least found one label data
             if first_dict_value != 0:
                 found_label_data = True
-            # If the key in the sorted dictionary can be found in the 
+            # If the key in the sorted dictionary can be found in the
             # vocab dictionary, return true
             for key in sorted_dictionary:
                 if vocabs is not None:
@@ -147,11 +153,12 @@ def segment(sentence_list):
                 # If there are more than one vocab in the dictionary, use MI to measure which one is better
                 if len(word_list) > 1:
                     if len(word_list) >= 2:
-                        merge_word = merge(word_list[0], sorted_dictionary[word_list[0]], word_list[1], sorted_dictionary[word_list[1]], label_data, count_label_data)
+                        merge_word = merge(word_list[0], sorted_dictionary[word_list[0]], word_list[1],
+                                           sorted_dictionary[word_list[1]], label_data, count_label_data)
                         #print("Merge word:", str(merge_word))
                         if merge_word == True:
                             index = 1
-                
+
                 count = len(word_list[index]) - 1
                 if sorted_dictionary[word_list[index]] != 0:
                     found_label_data = True
@@ -166,7 +173,8 @@ def segment(sentence_list):
                 # For some cases such as "係", "嘅", just split the most frequently label data.
                 the_word = list(sorted_dictionary.keys())[0]
             else:
-                the_word = list(sorted_dictionary.keys())[0]  # Out-of-vocabulary(OOV) cases
+                the_word = list(sorted_dictionary.keys())[
+                    0]  # Out-of-vocabulary(OOV) cases
             print("Found vocab: " + str(found_vocab) +
                   " ,number of vocab: " + str(len(word_list)))
             print("Found label data: " + str(found_label_data))
