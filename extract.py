@@ -105,8 +105,16 @@ def extract_all():
 
     return result
 
+def extract_all_unlabel():
+    #file_list = ['', '', '', '']
+    fp = open("unlabeled_data/FC-R018.cha", "w+", encoding='utf-8')
+    result = extract("labeled_data/FC-R018_v.cha")
+    unlabel_result = ""
+    for x in result:
+        unlabel_result = x.replace(" ", "") + "\n"
+        fp.write(unlabel_result)
+    fp.close()
 
 #  Implementation: Extract the labelled data from FC-001_v2.cha
 if __name__ == '__main__':
-    result = extract_all()
-    print(result)
+    extract_all_unlabel()
