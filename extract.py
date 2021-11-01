@@ -106,7 +106,6 @@ def extract_all():
     return result
 
 def extract_all_unlabel():
-    #file_list = ['', '', '', '']
     fp = open("unlabeled_data/FC-R018.cha", "w+", encoding='utf-8')
     result = extract("labeled_data/FC-R018_v.cha")
     unlabel_result = ""
