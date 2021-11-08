@@ -107,7 +107,9 @@ def extract_all():
 
 def extract_all_unlabel():
     fp = open("testing_data/train.txt", "w+", encoding='utf-8')
+    fq = open("testing_data/test.txt", "w+", encoding='utf-8')
     result = extract_all()
+    count = 0
     #result = ["嗰陣時 買 , 不過 唔係 個八 , 有 啲 個半 .", "但係 都 幾 貴 喎 ."]
     #correct_label = "bmessbebebesssbes"
     for label_data in result:
@@ -125,8 +127,14 @@ def extract_all_unlabel():
                     for i in range(len(s) - 2):
                         label += "m"
                     label += "e"
-            fp.write(label_data.replace(" ", "") + "\t" + label + "\n")
+            if count < 3154:
+                count += 1
+                fq.write(label_data.replace(" ", "") + "\t" + label + "\n")
+            else:
+                count += 1
+                fp.write(label_data.replace(" ", "") + "\t" + label + "\n")
     fp.close()
+    fq.close()
 
 #  Implementation: Extract the labelled data from FC-001_v2.cha
 if __name__ == '__main__':
