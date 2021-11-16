@@ -114,9 +114,9 @@ def extract_all_unlabel():
     #correct_label = "bmessbebebesssbes"
     for label_data in result:
         label = ""
-        if label_data != "" and len(label_data.replace(" ", "")) >= 3:
+        if label_data != "" and len(label_data.replace(" ", "")) >= 15:
+            '''
             tmp = label_data.split()
-            #print(tmp)
             for s in tmp:
                 if len(s) == 1:
                     label += "s"
@@ -127,12 +127,16 @@ def extract_all_unlabel():
                     for i in range(len(s) - 2):
                         label += "m"
                     label += "e"
-            if count < 3154:
+            '''
+            if count < 225:
                 count += 1
-                fq.write(label_data.replace(" ", "") + "\t" + label + "\n")
-            else:
-                count += 1
-                fp.write(label_data.replace(" ", "") + "\t" + label + "\n")
+                label = label_data.replace("  ", " ").replace("   ", " ").replace("    ", " ").replace("     ", " ").replace("      ", " ").replace("       ", " ")
+                fp.write(label.replace(" ", "/") + "\n")
+                fq.write(label_data.replace(" ", "") + "\n")
+                #fq.write(label_data.replace(" ", "") + "\t" + label + "\n")
+            #else:
+                #count += 1
+            #fp.write(label_data.replace(" ", "") + "\t" + label + "\n")
     fp.close()
     fq.close()
 

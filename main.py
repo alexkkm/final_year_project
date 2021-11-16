@@ -36,7 +36,7 @@ if __name__ == '__main__':
     sentence_list = []
     sentence_list2 = []
 
-    with open("testing_data/testing_data.txt", 'r', encoding='utf-8') as fd:
+    with open("testing_data/test.txt", 'r', encoding='utf-8') as fd:
         sentence_list = fd.readlines()
     for i in range(len(sentence_list)):
         tmp = sentence_list[i].replace("\n", "")
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     
     correct_sentence_list = []
     correct_sentence_list2 = []
-    with open("testing_data/correct_data.txt", 'r', encoding='utf-8') as fd:
+    with open("testing_data/train.txt", 'r', encoding='utf-8') as fd:
         correct_sentence_list = fd.readlines()
     for j in range(len(correct_sentence_list)):
         tmp = correct_sentence_list[j].replace("\n", "")
