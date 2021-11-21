@@ -70,7 +70,8 @@ def segment(sentence_list):
     segmentation_result = []
     my_count = 1
     for sentence in sentence_list:
-        print(str(my_count) + ": " + sentence)
+        #print("Sample sentence" + str(my_count) + ": " + sentence)
+        print("Sample sentence: " + sentence)
         my_count += 1
         # Dictionary-based Part
         # Build a Vocab Dictionary Prefix Tree
@@ -88,7 +89,7 @@ def segment(sentence_list):
             dict_trie.insert(vocabs)
 
         ####### Output1: Print out all vocab in vocab_dictionary which contains in sentence #######
-        print("Vocabs contains:")
+        print("Vocabs contain:")
         # Deal with the non-cantonese issue.
         tmp_sentence = sentence
         for ch in [' ', '.', '。', '?', '？', ',', '，', '<', '《', '>', '》', '、', '\\', '/', '\'', '“', '"', '”', '：', ':', '；', ';', '{', '}', '[', ']', '(', ')', '!', '！', '@', '#', '$', '%', '^', '&', '*', '_', '-', '+', '=', '|']:
@@ -112,7 +113,7 @@ def segment(sentence_list):
                 label_data_trie.insert(vocabs2)
                 # Calculate the number of characters in label data for calculate the MI value -> M
                 count_label_data += 1
-        #print("count_label_data:", count_label_data)
+        print("count_label_data:", count_label_data)
 
         sentence_len = len(sentence)
         new_segment = ""
@@ -120,6 +121,7 @@ def segment(sentence_list):
         maximum_char = 5
         count = 0
         i = 0
+        print("Label data contain:")
         while i < sentence_len:
             found_vocab = False
             found_label_data = False
@@ -132,16 +134,15 @@ def segment(sentence_list):
             sentence_list = sentence_to_prefix_tree_list(maximum_char, str1)
             #dictionary_list_len = len(dictionary_list)
             dictionary = {}
-
             # Get the frequency of each splitted sentence, if no just return 0
             for x in sentence_list:
                 dictionary[x] = label_data_trie.get_frequency(x)
-            #print("frequency:")
+            #print("Label data contain:")
 
             # Sort value found from the dictionary in descending order.
             sorted_dictionary = dict(
                 sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True))
-            #print(sorted_dictionary)
+            print(sorted_dictionary)
 
             word_list = []
             index = 0

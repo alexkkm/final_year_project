@@ -116,3 +116,4 @@ def extract_all_unlabel():
 #  Implementation: Extract the labelled data from FC-001_v2.cha
 if __name__ == '__main__':
     extract_all_unlabel()
+    #print(extract("labeled_data/FC-001_v2.cha"))

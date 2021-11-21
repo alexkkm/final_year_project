@@ -28,6 +28,7 @@ class DictionaryPrefixTree:
         current.is_word = True
 
     # Returning the TrieNode representing the given word
+    # Not in use
     def find(self, word):
         '''
         Returns the TrieNode representing the given word if it exists
@@ -43,6 +44,7 @@ class DictionaryPrefixTree:
             return current
 
     # Returning a list of all words beginning with the given prefix, or an empty list if no words begin with that prefix
+    # Not in use
     def starts_with(self, prefix):
         words = list()
         current = self.root
@@ -87,7 +89,8 @@ class DictionaryPrefixTree:
         dictionary = list()
         return self.recursion(sentence, dictionary)
 
-    # Main Dishes: Returning the segmented sentence  // Not implement yet
+    # Main Dishes: Returning the segmented sentence.
+    # Not in use
     def segment(self, prefix):
         the_word = ""
         current = self.root
