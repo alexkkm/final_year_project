@@ -43,9 +43,9 @@ def f_score(segmentation_result, correct_sentence_list):
         count_TP = len(set(s1) & set(s2))
         precision += count_TP / count_FP
         recall += count_TP / count_FN
-        print("TP:", count_TP)
-        print("FP:", count_FP)
-        print("FN:", count_FN)
+        #print("TP:", count_TP)
+        #print("FP:", count_FP)
+        #print("FN:", count_FN)
 
     precision = precision / number_of_sentence
     recall = recall / number_of_sentence

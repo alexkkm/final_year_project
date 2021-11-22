@@ -1,6 +1,6 @@
 from fscore import f_score
 from segment import segment
-
+from datetime import datetime
 ##################Sampledata#######################
 '''
 sentence1 = "世一中場佐真奴"
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     ### Sentence would like to analysis ###
     sentence_list = []
     sentence_list2 = []
-
+    start=datetime.now()
     with open("testing_data/test.txt", 'r', encoding='utf-8') as fd:
         sentence_list = fd.readlines()
     for i in range(len(sentence_list)):
@@ -65,4 +65,4 @@ if __name__ == '__main__':
 
     # Calculate Precision
     f_score(segmentation_result, correct_sentence_list2)
-    
+    print("Run time:", datetime.now()-start)    
