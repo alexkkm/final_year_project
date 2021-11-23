@@ -69,24 +69,44 @@ def merge(word1, count_word1, word2, count_word2, label_data, len, vocab_list):
 def segment(sentence_list):
     segmentation_result = []
     my_count = 1
+
+    # Dictionary-based Part
+    # Build a Vocab Dictionary Prefix Tree
+    dict_trie = DictionaryPrefixTree()
+
+    # Create a file pointer fd,open th vocab dictionary with read-only mode
+    with open("dictionary/vocab_dictionary.txt", 'r', encoding='utf-8') as fd:
+        dictionary_list = fd.readlines()
+        # Remove space appears in all lines of dictionary_list
+        dictionary_list = [line.rstrip() for line in dictionary_list]
+
+    # For all vocabs in dictionary_list
+    for vocabs in dictionary_list:
+        # Insert the words into the DictionaryPrefixTree trie
+        dict_trie.insert(vocabs)
+
+    # Build a Label Data Prefix Tree
+    label_data_trie = LabelDataPrefixTree()
+    count_label_data = 0
+    # Extract all label data from the datasets
+    label_data = extract_all()
+    for label_data_list in label_data:
+        # Split the label data string
+        label_data_split = label_data_list.split()
+        # For all vocabs in label_data_list
+        for vocabs2 in label_data_split:
+            # Insert the words into the LabelDataPrefixTree trie
+            label_data_trie.insert(vocabs2)
+            # Calculate the number of characters in label data for calculate the MI value -> M
+            count_label_data += 1
+    #print("count_label_data:", count_label_data)
+
     for sentence in sentence_list:
         #print("Sample sentence" + str(my_count) + ": " + sentence)
         print("Sample sentence " + str(my_count) +": " + sentence)
         my_count += 1
-        # Dictionary-based Part
-        # Build a Vocab Dictionary Prefix Tree
-        dict_trie = DictionaryPrefixTree()
 
-        # Create a file pointer fd,open th vocab dictionary with read-only mode
-        with open("dictionary/vocab_dictionary.txt", 'r', encoding='utf-8') as fd:
-            dictionary_list = fd.readlines()
-            # Remove space appears in all lines of dictionary_list
-            dictionary_list = [line.rstrip() for line in dictionary_list]
 
-        # For all vocabs in dictionary_list
-        for vocabs in dictionary_list:
-            # Insert the words into the DictionaryPrefixTree trie
-            dict_trie.insert(vocabs)
 
         ####### Output1: Print out all vocab in vocab_dictionary which contains in sentence #######
         #print("Vocabs contain:")
@@ -99,21 +119,7 @@ def segment(sentence_list):
         vocabs = dict_trie.contains(tmp_sentence)
         #print(vocabs)
 
-        # Build a Label Data Prefix Tree
-        label_data_trie = LabelDataPrefixTree()
-        count_label_data = 0
-        # Extract all label data from the datasets
-        label_data = extract_all()
-        for label_data_list in label_data:
-            # Split the label data string
-            label_data_split = label_data_list.split()
-            # For all vocabs in label_data_list
-            for vocabs2 in label_data_split:
-                # Insert the words into the LabelDataPrefixTree trie
-                label_data_trie.insert(vocabs2)
-                # Calculate the number of characters in label data for calculate the MI value -> M
-                count_label_data += 1
-        #print("count_label_data:", count_label_data)
+
 
         sentence_len = len(sentence)
         new_segment = ""
