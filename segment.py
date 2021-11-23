@@ -199,10 +199,11 @@ def segment(sentence_list):
             #print("Found label data: " + str(found_label_data))
             i += count
             i += 1
-            if i < sentence_len:
-                new_segment += the_word + "/"
-            else:
-                new_segment += the_word
+            #if i < sentence_len:
+            #    new_segment += the_word + "/"
+            #else:
+            #    new_segment += the_word
+            new_segment += the_word + "/"
             #print(new_segment)
             if i >= sentence_len:
                 segmentation_result.append(new_segment)

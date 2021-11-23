@@ -6,27 +6,6 @@ def f_score(segmentation_result, correct_sentence_list):
     number_of_sentence = len(segmentation_result)
 
     # initialize the sentence in given sentence_list
-    '''
-    for sentence in segmentation_result:
-        new_sentence = ""
-        for i in range(len(sentence)-1):
-            if sentence[i] != "/" and sentence[i+1] != "/":
-                new_sentence += sentence[i] + "_"
-            else:
-                new_sentence += sentence[i]
-        new_sentence += sentence[len(sentence)-1]
-        new_list1.append(new_sentence)
-
-    for correct_sentence in correct_sentence_list:
-        new_sentence = ""
-        for j in range(len(correct_sentence) - 1):
-            if correct_sentence[j] != "/" and correct_sentence[j+1] != "/":
-                new_sentence += correct_sentence[j] + "_"
-            else:
-                new_sentence += correct_sentence[j]
-        new_sentence += correct_sentence[len(correct_sentence)-1]
-        new_list2.append(new_sentence)
-    '''
     # Calculate the Precision, Recall and F-score of the System
     precision = 0
     recall = 0

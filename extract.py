@@ -113,7 +113,27 @@ def extract_all_unlabel():
             fp.write(label_data.replace(" ", "") + "\n")
     fp.close()
 
+def to_label_data():
+    fp = open("testing_data/testing.txt", "w+", encoding='utf-8')
+    with open("testing_data/train.txt", 'r+', encoding='utf-8') as fd:
+        sentence_list = fd.readlines()
+    
+    for sentence in sentence_list:
+        label = ""
+        s = sentence.replace("\n", "").split("/")
+        for i in s:
+            if len(i) == 1:
+                label += 's'
+            elif len(i) == 2:
+                label += 'be'
+            elif len(i) > 2:
+                label += 'b'
+                for j in range(len(i) - 2):
+                    label += 'm'
+                label += 'e'
+        fp.write(sentence.replace("\n", "").replace("/", "") + "\t" + label + "\n")
 #  Implementation: Extract the labelled data from FC-001_v2.cha
 if __name__ == '__main__':
-    extract_all_unlabel()
+    #extract_all_unlabel()
+    to_label_data()
     #print(extract("labeled_data/FC-001_v2.cha"))

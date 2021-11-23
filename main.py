@@ -47,8 +47,8 @@ if __name__ == '__main__':
     #segmentation_result = sentence_list2
 
     # Print the segmentation result
-    print("segmentation_result_list: "+str(segmentation_result))
-    
+    #print("segmentation_result_list: "+str(segmentation_result))
+
     fp = open("testing_data/output_data.txt", "w+", encoding='utf-8')
     for x in segmentation_result:
         the_str = x + "\n"
@@ -65,4 +65,5 @@ if __name__ == '__main__':
 
     # Calculate Precision
     f_score(segmentation_result, correct_sentence_list2)
+
     print("Run time:", datetime.now()-start)    
