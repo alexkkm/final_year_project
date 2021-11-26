@@ -113,6 +113,26 @@ def extract_all_unlabel():
             fp.write(label_data.replace(" ", "") + "\n")
     fp.close()
 
+def label_to_seperate_data():
+    fp = open("testing_data/testing_data.txt", "w+", encoding='utf-8')
+    fq = open("testing_data/correct_data.txt", "w+", encoding='utf-8')
+    with open("testing_data/test.txt", 'r+', encoding='utf-8') as fd:
+        sentence_list = fd.readlines()
+
+    for sentence in sentence_list:
+        s = sentence.replace("\n", "").split("\t")
+        new_sentence = ""
+        count = 0
+        for c in s[1]:
+            if c == 's' or c == 'e':
+                new_sentence = new_sentence + s[0][count] + '/'
+                count += 1
+            else:
+                new_sentence += s[0][count]
+                count += 1
+        fp.write(s[0] + "\n")
+        fq.write(new_sentence + "\n")
+
 def to_label_data():
     fp = open("testing_data/testing.txt", "w+", encoding='utf-8')
     with open("testing_data/train.txt", 'r+', encoding='utf-8') as fd:
@@ -135,5 +155,5 @@ def to_label_data():
 #  Implementation: Extract the labelled data from FC-001_v2.cha
 if __name__ == '__main__':
     #extract_all_unlabel()
-    to_label_data()
+    label_to_seperate_data()
     #print(extract("labeled_data/FC-001_v2.cha"))
