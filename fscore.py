@@ -1,8 +1,6 @@
 
 # Output the calculation of Precision,Recall,F-score by given output sentence list and given correct sentence list
 def f_score(segmentation_result, correct_sentence_list):
-    new_list1 = []
-    new_list2 = []
     number_of_sentence = len(segmentation_result)
 
     # initialize the sentence in given sentence_list
