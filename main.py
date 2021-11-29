@@ -66,4 +66,4 @@ if __name__ == '__main__':
     # Calculate Precision
     f_score(segmentation_result, correct_sentence_list2)
 
-    print("Run time:", datetime.now()-start)    
+    print("Run time:", datetime.now()-start)
