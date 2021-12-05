@@ -105,12 +105,14 @@ def extract_all():
 
     return result
 
-def extract_all_unlabel():
-    fp = open("unlabeled_data/unlabel_data.txt", "w+", encoding='utf-8')
+def extract_all_label():
+    print("yes")
+    fp = open("labeled_data/labeled_data.txt", "w+", encoding='utf-8')
     result = extract_all()
     for label_data in result:
-        if label_data != "":
-            fp.write(label_data.replace(" ", "") + "\n")
+        if label_data != "" and len(label_data.replace(" ", "")) > 2:
+            s = label_data.replace(" ", "/")
+            fp.write(s.replace("//", "/").replace("///", "/").replace("////", "/").replace("/////", "/") + "\n")
     fp.close()
 
 def label_to_seperate_data():
@@ -134,8 +136,8 @@ def label_to_seperate_data():
         fq.write(new_sentence + "\n")
 
 def to_label_data():
-    fp = open("testing_data/testing.txt", "w+", encoding='utf-8')
-    with open("testing_data/train.txt", 'r+', encoding='utf-8') as fd:
+    fp = open("labeled_data/labeled_data2.txt", "w+", encoding='utf-8')
+    with open("labeled_data/labeled_data.txt", 'r+', encoding='utf-8') as fd:
         sentence_list = fd.readlines()
     
     for sentence in sentence_list:
@@ -153,7 +155,19 @@ def to_label_data():
                 label += 'e'
         fp.write(sentence.replace("\n", "").replace("/", "") + "\t" + label + "\n")
 #  Implementation: Extract the labelled data from FC-001_v2.cha
+
+def removeDups():
+    infilename = 'labeled_data/labeled_data.txt'
+    outfilename = 'labeled_data/labeled_data2.txt'
+    lines=open(infilename, 'r+', encoding='utf-8').readlines()
+    lines_set = set(lines)
+    out=open(outfilename, 'w+', encoding='utf-8')
+    for line in lines_set:
+        out.write(line)
+
 if __name__ == '__main__':
-    #extract_all_unlabel()
-    label_to_seperate_data()
+    #extract_all_label()
+    #label_to_seperate_data()
+    #removeDups()
+    to_label_data()
     #print(extract("labeled_data/FC-001_v2.cha"))

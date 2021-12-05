@@ -99,7 +99,7 @@ def segment(sentence_list):
             label_data_trie.insert(vocabs2)
             # Calculate the number of characters in label data for calculate the MI value -> M
             count_label_data += 1
-    #print("count_label_data:", count_label_data)
+    print("count_label_data:", count_label_data)
 
     for sentence in sentence_list:
         #print("Sample sentence" + str(my_count) + ": " + sentence)
